@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 # Create your models here.
 class Movie(models.Model):
@@ -11,6 +12,10 @@ class Movie(models.Model):
 
     def get_url(self):
         return reverse('movie-detail', args=[self.id])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Movie, self).save(*args, **kwargs)
 
 
     def __str__(self):
