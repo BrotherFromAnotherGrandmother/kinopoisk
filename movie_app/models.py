@@ -11,7 +11,7 @@ class Movie(models.Model):
     slug = models.SlugField(default='', null=False)
 
     def get_url(self):
-        return reverse('movie-detail', args=[self.id])
+        return reverse('movie-detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
