@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from movie_app.models import Movie
+from django.db.models import F
 # Create your views here.
 
 def show_all_movie(request):
-    movies = Movie.objects.order_by('year')
+    movies = Movie.objects.order_by(F('year').asc(nulls_last=True), 'rating')
     return render(request, 'movie_app/all_movies.html', {
         'movies': movies
     })
