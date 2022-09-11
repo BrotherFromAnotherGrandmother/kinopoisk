@@ -5,10 +5,11 @@ from django.db.models import F, Sum, Min, Max, Count, Avg
 
 def show_all_movie(request):
     movies = Movie.objects.order_by(F('year').asc(nulls_last=True), 'rating')
-    agg = movies.aggregate(Avg('budget'), Max('rating'), Min('rating'))
+    agg = movies.aggregate(Avg('budget'), Max('rating'), Min('rating'), Count('id'))
     return render(request, 'movie_app/all_movies.html', {
         'movies': movies,
         'agg': agg,
+        'total': movies.count(),
     })
 
 def show_one_movie(request, slug_movie:str):
