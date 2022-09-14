@@ -7,3 +7,5 @@ from .models import Movie
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'rating', 'year', 'budget']
     list_editable = ['rating', 'year', 'budget']
+    ordering = ['-rating', 'name']
+    list_per_page = 2
