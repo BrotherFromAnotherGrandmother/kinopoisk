@@ -3,9 +3,6 @@ from .models import Movie
 
 
 # Register your models here.
-
+@admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'rating', 'year', 'budget']
-
-
-admin.site.register(Movie, MovieAdmin)
