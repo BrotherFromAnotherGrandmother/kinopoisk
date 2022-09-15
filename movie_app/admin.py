@@ -5,6 +5,8 @@ from django.db.models import QuerySet
 
 # Register your models here.
 class RatingFilter(admin.SimpleListFilter):
+    title = 'Фильтр по рейтингу'
+    parameter_name = 'asdf'
     def lookups(self, request, model_admin):
         return [
             ('<40', 'Низкий'),
@@ -14,8 +16,14 @@ class RatingFilter(admin.SimpleListFilter):
         ]
 
     def queryset(self, request, queryset):
-        return queryset
-
+        if self.value() == '<40':
+            return queryset.filter(rating__lt=40)
+        if self.value() == 'от 40 до 59':
+            return queryset.filter(rating__gte=40).filter(rating__lt=60)
+        if self.value() == 'от 60 до 79':
+            return queryset.filter(rating__gte=60).filter(rating__lt=80)
+        if self.value() == '>=80':
+            return queryset.filter(rating__gte=80)
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -25,7 +33,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_per_page = 10
     actions = ['set_dollars', 'set_euro']
     search_fields = ['name__startswith', 'rating']
-    list_filter = ['name', 'rating', 'currency']
+    list_filter = ['name', 'currency', RatingFilter]
 
 
     @admin.display(ordering='rating', description='Статус')
