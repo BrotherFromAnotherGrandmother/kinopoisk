@@ -2,6 +2,7 @@ from django.contrib import admin, messages
 from .models import Movie
 from django.db.models import QuerySet
 
+
 # Register your models here.
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
@@ -10,10 +11,12 @@ class MovieAdmin(admin.ModelAdmin):
     # ordering = ['-rating', 'name']
     list_per_page = 10
     actions = ['set_dollars', 'set_euro']
-    search_fields = ['name', 'rating']
+    search_fields = ['name__startswith', 'rating']
+    list_filter = ['name', 'rating', 'currency']
+
 
     @admin.display(ordering='rating', description='Статус')
-    def rating_status(self, mov:Movie) -> str:
+    def rating_status(self, mov: Movie) -> str:
         if mov.rating < 50:
             return 'Зачем это смотреть'
         if mov.rating < 70:
@@ -23,11 +26,11 @@ class MovieAdmin(admin.ModelAdmin):
         return 'Топчик'
 
     @admin.action(description='Установить валюту в доллар')
-    def set_dollars(self, request, qs:QuerySet):
+    def set_dollars(self, request, qs: QuerySet):
         qs.update(currency=Movie.USD)
 
     @admin.action(description='Установить валюту в евро')
-    def set_euro(self, request, qs:QuerySet):
+    def set_euro(self, request, qs: QuerySet):
         count_updated = qs.update(currency=Movie.EUR)
         self.message_user(
             request,
