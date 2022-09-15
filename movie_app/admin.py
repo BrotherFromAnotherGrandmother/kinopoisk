@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Movie
-
+from django.db.models import QuerySet
 
 # Register your models here.
 @admin.register(Movie)
@@ -19,3 +19,6 @@ class MovieAdmin(admin.ModelAdmin):
         if mov.rating < 85:
             return 'Зачёт'
         return 'Топчик'
+
+    def set_dollars(self, request, qs:QuerySet):
+        qs.update(currency=Movie.USD)
