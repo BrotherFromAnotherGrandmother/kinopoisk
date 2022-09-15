@@ -4,6 +4,19 @@ from django.db.models import QuerySet
 
 
 # Register your models here.
+class RatingFilter(admin.SimpleListFilter):
+    def lookups(self, request, model_admin):
+        return [
+            ('<40', 'Низкий'),
+            ('от 40 до 59', 'Средний'),
+            ('от 60 до 79', 'Высокий'),
+            ('>=80', 'Высочайший'),
+        ]
+
+    def queryset(self, request, queryset):
+        return queryset
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'rating', 'currency', 'budget', 'rating_status']
