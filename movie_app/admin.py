@@ -5,17 +5,16 @@ from .models import Movie
 # Register your models here.
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ['name', 'rating', 'year', 'budget']
+    list_display = ['name', 'rating', 'year', 'budget', 'rating_status']
     list_editable = ['rating', 'year', 'budget']
     ordering = ['-rating', 'name']
-    list_per_page = 2
+    list_per_page = 10
 
-    def rating_status(self, mov:str) -> str:
+    def rating_status(self, mov:Movie) -> str:
         if mov.rating < 50:
             return 'Зачем это смотреть'
         if mov.rating < 70:
             return 'Разок можно глянуть'
         if mov.rating < 85:
             return 'Зачёт'
-        else:
-            return 'Топчик'
+        return 'Топчик'
