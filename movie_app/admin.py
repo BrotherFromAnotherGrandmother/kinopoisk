@@ -9,3 +9,13 @@ class MovieAdmin(admin.ModelAdmin):
     list_editable = ['rating', 'year', 'budget']
     ordering = ['-rating', 'name']
     list_per_page = 2
+
+    def rating_status(self, mov:str) -> str:
+        if mov.rating < 50:
+            return 'Зачем это смотреть'
+        if mov.rating < 70:
+            return 'Разок можно глянуть'
+        if mov.rating < 85:
+            return 'Зачёт'
+        else:
+            return 'Топчик'
