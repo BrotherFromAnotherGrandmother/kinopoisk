@@ -7,9 +7,10 @@ from .models import Movie
 class MovieAdmin(admin.ModelAdmin):
     list_display = ['name', 'rating', 'year', 'budget', 'rating_status']
     list_editable = ['rating', 'year', 'budget']
-    ordering = ['-rating', 'name']
+    # ordering = ['-rating', 'name']
     list_per_page = 10
 
+    @admin.display(ordering='rating', description='Статус')
     def rating_status(self, mov:Movie) -> str:
         if mov.rating < 50:
             return 'Зачем это смотреть'
