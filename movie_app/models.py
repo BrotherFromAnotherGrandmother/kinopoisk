@@ -27,9 +27,5 @@ class Movie(models.Model):
     def get_url(self):
         return reverse('movie-detail', args=[self.slug])
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Movie, self).save(*args, **kwargs)
-
     def __str__(self):
         return f'{self.name} - {self.rating}%'
