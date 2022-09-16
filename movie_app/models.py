@@ -17,7 +17,7 @@ class Movie(models.Model):
     name = models.CharField(max_length=40)
     rating = models.IntegerField()
     year = models.IntegerField(null=True, blank=True)
-    budget = models.IntegerField(default=1000000)
+    budget = models.IntegerField(default=1000000, blank=True)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=EUR)
     slug = models.SlugField(default='', null=False, db_index=True)
 
