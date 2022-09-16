@@ -5,6 +5,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
+class Director(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    directors_email = models.EmailField()
+
+
 class Movie(models.Model):
     EUR = 'EUR'
     USD = 'USD'
@@ -23,8 +29,6 @@ class Movie(models.Model):
                                  validators=[MinValueValidator(1)])
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=EUR)
     slug = models.SlugField(default='', null=False, db_index=True)
-    director = models.CharField(max_length=100, default='Квентин Тарантино')
-    directors_email = models.EmailField(default='sugar_daddy@gmail.com')
 
     def get_url(self):
         return reverse('movie-detail', args=[self.slug])
