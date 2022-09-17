@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from movie_app.models import Movie
+from movie_app.models import Movie, Director
 from django.db.models import F, Sum, Min, Max, Count, Avg, Value
 
 
@@ -34,4 +34,21 @@ def show_one_director(request, slug_director: str):
     director = get_object_or_404(Movie, slug=slug_director)
     return render(request, 'movie_app/one_director.html', {
         'director': director
+    })
+
+def show_all_director(request):
+    # movies = Movie.objects.order_by(F('year').asc(nulls_last=True), 'rating')
+    directors = Director.objects.annotate(
+        true_bool=Value(True),
+        false_bool=Value(False),
+        str_field=Value('hello'),
+        int_field=Value(123),
+        new_budget=F('budget') + 100,
+        new_cadabra=F('rating') + F('year'),
+    )
+    agg = directors.aggregate(Avg('budget'), Max('rating'), Min('rating'), Count('id'))
+    return render(request, 'movie_app/all_directors.html', {
+        'directors': directors,
+        'agg': agg,
+        'total': directors.count(),
     })
