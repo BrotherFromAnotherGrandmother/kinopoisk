@@ -32,7 +32,7 @@ class Movie(models.Model):
                                  validators=[MinValueValidator(1)])
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=EUR)
     slug = models.SlugField(default='', null=False, db_index=True)
-    director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
 
     def get_url(self):
         return reverse('movie-detail', args=[self.slug])
