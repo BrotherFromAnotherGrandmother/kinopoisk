@@ -32,6 +32,6 @@ def show_one_movie(request, slug_movie: str):
 
 def show_one_director(request, slug_director: str):
     director = get_object_or_404(Movie, slug=slug_director)
-    return render(request, 'movie_app/one_movie.html', {
+    return render(request, 'movie_app/one_director.html', {
         'director': director
     })
