@@ -1,10 +1,10 @@
-{% extends 'movie_app/base.html'%}
+{% extends 'movie_app/base_director.html'%}
 
-{% block title %} Информация о фильме - {{movie}} {% endblock %}
+{% block title %} Информация о режиссёре - {{director}} {% endblock %}
 
 {% block content %}
-    <h2>Информация о фильме</h2>
-    <h3>Рейтинг {{movie.rating}}</h3>
-    <h3>Бюджет {{movie.budget}}</h3>
-    <h3>Год выхода {{movie.year}}</h3>
+    <h2>Режиссёр</h2>
+    <h3>Имя {{director.first_name}}</h3>
+    <h3>Фамилия {{director.last_name}}</h3>
+    <h3>Почта {{director.directors_email}}</h3>
 {% endblock %}
