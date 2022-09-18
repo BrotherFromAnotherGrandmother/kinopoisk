@@ -18,16 +18,19 @@ class Actor(models.Model):
     MALE = 'M'
     FEMALE = 'F'
     RUB = 'RUB'
-    CURRENCY_CHOICES = [
+    GENDERS = [
         (MALE, 'Мужчина'),
         (FEMALE, 'Женщина'),
     ]
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    gender = models.EmailField()
+    gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        if self.gender == self.MALE:
+            return f'Актёр {self.first_name} {self.last_name}'
+        else:
+            f'Актрисса {self.first_name} {self.last_name}'
 
 class Movie(models.Model):
     EUR = 'EUR'
