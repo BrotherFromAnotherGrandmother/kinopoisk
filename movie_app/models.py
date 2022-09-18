@@ -14,6 +14,21 @@ class Director(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
+class Actor(models.Model):
+    MALE = 'M'
+    FEMALE = 'F'
+    RUB = 'RUB'
+    CURRENCY_CHOICES = [
+        (MALE, 'Мужчина'),
+        (FEMALE, 'Женщина'),
+    ]
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    gender = models.EmailField()
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 class Movie(models.Model):
     EUR = 'EUR'
     USD = 'USD'
