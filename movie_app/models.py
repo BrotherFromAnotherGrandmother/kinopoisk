@@ -30,7 +30,7 @@ class Actor(models.Model):
         if self.gender == self.MALE:
             return f'Актёр {self.first_name} {self.last_name}'
         else:
-            f'Актрисса {self.first_name} {self.last_name}'
+            return f'Актрисса {self.first_name} {self.last_name}'
 
 class Movie(models.Model):
     EUR = 'EUR'
