@@ -13,13 +13,10 @@
     <h3>Фамилия - {{movie.director.last_name}}</h3>
     <h3>Почта - {{movie.director.directors_email}}</h3>
     <hr>
-    <h2>Список актёров</h2>
+    <h3>Список актёров</h3>
     <ul>
-        {% for actor in movie.object.all %}
-                рейтинг - {{movie.rating}},
-                бюджет - {{movie.budget}},
-                год - {{movie.year|default:'Неизвестен'}}
-            </li>
+        {% for actor in movie.actors.all %}
+            <li>{{ actor }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
