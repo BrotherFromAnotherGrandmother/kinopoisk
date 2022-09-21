@@ -28,8 +28,3 @@ def show_one_movie(request, slug_movie: str):
         'movie': movie
     })
 
-def show_all_actors(request):
-    actors = Actor.objects.all()
-    return render(request, 'movie_app/all_actors.html', {
-        'actors': actors,
-    })
