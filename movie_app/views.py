@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from movie_app.models import Movie, Actor
+from movie_app.models import Movie, Director
 from django.db.models import F, Sum, Min, Max, Count, Avg, Value
 
 
@@ -28,3 +28,8 @@ def show_one_movie(request, slug_movie: str):
         'movie': movie
     })
 
+def show_all_directors(request):
+    directors = Director.objects.all()
+    return render(request, 'movie_app/all_movies.html', {
+        'directors': directors,
+    })
