@@ -38,7 +38,7 @@ class MovieAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ['name', 'rating', 'director', 'budget', 'rating_status']
     list_editable = ['rating', 'director', 'budget']
-    filter_vertical = ['actors']
+    filter_horizontal = ['actors']
     list_per_page = 10
     actions = ['set_dollars', 'set_euro']
     search_fields = ['name__startswith', 'rating']
