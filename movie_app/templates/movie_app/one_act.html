@@ -7,4 +7,12 @@
     <h3>Имя - {{act.first_name}} </h3>
     <h3>Фамилия - {{act.last_name}}</h3>
     <h3>Пол - {{act.gender}}</h3>
+    <hr>
+    <h3>Список фильмов</h3>
+    <ul>
+        {% for movie in act.movies.all %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
