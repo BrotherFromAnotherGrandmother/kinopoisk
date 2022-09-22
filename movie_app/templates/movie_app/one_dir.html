@@ -10,7 +10,7 @@
     <hr>
     <h3>Список фильмов</h3>
     <ul>
-        {% for movie in dir.movie_set.all %}
+        {% for movie in dir.movies.all %}
             <li>{{ movie }}</li>
         {% endfor %}
     </ul>
