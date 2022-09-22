@@ -30,6 +30,12 @@ def show_one_movie(request, slug_movie: str):
 
 def show_all_directors(request):
     directors = Director.objects.all()
-    return render(request, 'movie_app/all_movies.html', {
+    return render(request, 'movie_app/all_directors.html', {
         'directors': directors,
+    })
+
+def show_one_dir(request, id_dir: int):
+    dir = get_object_or_404(Director, id=id_dir)
+    return render(request, 'movie_app/one_dir.html', {
+        'dir': dir,
     })
