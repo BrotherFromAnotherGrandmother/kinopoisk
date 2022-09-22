@@ -35,6 +35,9 @@ class Actor(models.Model):
         else:
             return f'Актрисса {self.first_name} {self.last_name}'
 
+    def get_url(self):
+        return reverse('actor-detail', args=[self.id])
+
 
 class Movie(models.Model):
     EUR = 'EUR'
