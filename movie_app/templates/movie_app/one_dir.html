@@ -7,4 +7,11 @@
     <h3>Имя - {{dir.first_name}} </h3>
     <h3>Фамилия - {{dir.last_name}}</h3>
     <h3>Почта - {{dir.directors_email}}</h3>
+    <hr>
+    <h3>Список фильмов</h3>
+    <ul>
+        {% for movie in dir.movie_set.all %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
